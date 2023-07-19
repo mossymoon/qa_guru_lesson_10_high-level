@@ -1,7 +1,8 @@
-import os
 from selene import browser, be, have
 from selene.core import command
 from pages.registration_page import UserPageFillForm
+from tests import paths
+
 
 class RegistrationPage:
     def __init__(self):
@@ -23,7 +24,7 @@ class RegistrationPage:
         browser.element('[id="subjectsInput"]').click().send_keys(user.subject).press_enter()
         browser.element('[for="hobbies-checkbox-1"]').perform(command.js.scroll_into_view)
         browser.element('[for="hobbies-checkbox-1"]').click()
-        browser.element('#uploadPicture').set_value(os.path.abspath('../tests/resources/picture.jpeg'))
+        browser.element('#uploadPicture').set_value(paths.get_path_to_photo(user.picture))
         browser.element('[id=currentAddress]').type(user.address)
         browser.element('#state').perform(command.js.scroll_into_view)
         browser.element('#state').click()
